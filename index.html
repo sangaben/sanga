@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sanga Ben | Full-Stack Developer & Designer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2d3436;
+      --secondary: #0984e3;
+      --accent: #00cec9;
+      --light: #dfe6e9;
+      --dark: #1e272e;
+      --success: #00b894;
+      --creative: #6c5ce7;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f9f9;
+      color: var(--primary);
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--dark));
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
+      position: relative;
+    }
+    
+    .profile-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--accent);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    section {
+      padding: 4rem 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      color: var(--secondary);
+      position: relative;
+      display: inline-block;
+    }
+    
+    section h2::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      width: 60px;
+      height: 4px;
+      background-color: var(--accent);
+    }
+    
+    #about {
+      background-color: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      margin: -2rem auto 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    #services {
+      background-color: #f1f3f6;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .service-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 1rem;
+      background: linear-gradient(45deg, var(--secondary), var(--accent));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    .service-card.web-dev {
+      border-top: 4px solid var(--secondary);
+    }
+    
+    .service-card.design {
+      border-top: 4px solid var(--creative);
+    }
+    
+    .service-card.hosting {
+      border-top: 4px solid var(--success);
+    }
+    
+    .service-card h3 {
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+    
+    .service-card p {
+      color: #555;
+      font-size: 0.95rem;
+    }
+    
+    #education {
+      background-color: white;
+    }
+    
+    .education-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    
+    .education-icon {
+      background-color: var(--accent);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    
+    .education-details h3 {
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .education-details .degree {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    .education-details .year {
+      color: #666;
+      font-style: italic;
+    }
+    
+    #projects {
+      background-color: #f1f3f6;
+    }
+    
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .project-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #eee;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .project-card h3 {
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+    
+    .project-card p {
+      color: #555;
+      margin-bottom: 1rem;
+    }
+    
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .project-link:hover {
+      background-color: rgba(0, 132, 227, 0.1);
+    }
+    
+    .project-link i {
+      font-size: 0.9rem;
+    }
+    
+    .tech-used {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    
+    .tech-tag {
+      background-color: var(--light);
+      color: var(--primary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    #skills {
+      background-color: white;
+    }
+    
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .skill-category {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .skill-category h3 {
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .skill-category ul {
+      list-style-type: none;
+    }
+    
+    .skill-category li {
+      margin-bottom: 0.8rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    
+    .skill-category li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+    
+    #contact {
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary), var(--dark));
+      color: white;
+    }
+    
+    #contact h2 {
+      color: white;
+    }
+    
+    #contact h2::after {
+      background-color: var(--accent);
+    }
+    
+    .contact-methods {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    
+    .contact-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+      min-width: 200px;
+    }
+    
+    .contact-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .contact-card i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+    
+    .contact-card a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .contact-card a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background-color: var(--dark);
+      color: white;
+    }
+    
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      
+      section {
+        padding: 3rem 1rem;
+      }
+      
+      .education-card {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="profile-container">
+      <img src="sanga.jpg" alt="Sanga Benjamin" class="profile-image">
+      <div>
+        <h1>Sanga Ben</h1>
+        <p>Full-Stack Developer | Designer | Web Solutions Provider</p>
+      </div>
+    </div>
+    <nav>
+      <a href="#about"><i class="fas fa-user"></i> About</a>
+      <a href="#services"><i class="fas fa-laptop-code"></i> Services</a>
+      <a href="#education"><i class="fas fa-graduation-cap"></i> Education</a>
+      <a href="#projects"><i class="fas fa-code"></i> Projects</a>
+      <a href="#skills"><i class="fas fa-cogs"></i> Skills</a>
+      <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I'm Sanga Ben, a versatile technology professional based in Uganda, specializing in full-stack development, graphic design, and web hosting solutions. With a strong foundation in both technical and creative disciplines, I deliver comprehensive digital solutions that combine functionality with aesthetic appeal.</p>
+    <p>As an Information Systems graduate from Muni University, I approach projects with a unique blend of technical expertise and creative problem-solving. Whether you need a custom web application, eye-catching designs, or reliable hosting services, I provide end-to-end solutions tailored to your business needs.</p>
+  </section>
+
+  <section id="services">
+    <h2>My Services</h2>
+    <div class="services-grid">
+      <div class="service-card web-dev">
+        <div class="service-icon">
+          <i class="fas fa-code"></i>
+        </div>
+        <h3>Web Development</h3>
+        <p>Custom web applications built with Django, React, and modern frameworks. From simple websites to complex enterprise solutions.</p>
+      </div>
+      
+      <div class="service-card design">
+        <div class="service-icon">
+          <i class="fas fa-paint-brush"></i>
+        </div>
+        <h3>Graphics & Design</h3>
+        <p>Professional logo design, branding materials, UI/UX design, and marketing collateral that makes your business stand out.</p>
+      </div>
+      
+      <div class="service-card hosting">
+        <div class="service-icon">
+          <i class="fas fa-server"></i>
+        </div>
+        <h3>Web Hosting</h3>
+        <p>Reliable website hosting with 99.9% uptime, SSL certificates, and maintenance services to keep your site running smoothly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="education-card">
+      <div class="education-icon">
+        <i class="fas fa-university"></i>
+      </div>
+      <div class="education-details">
+        <h3>Muni University</h3>
+        <p class="degree">Bachelor of Science in Information Systems</p>
+        <p class="year">2021 - 2024</p>
+        <p>Specialized in software development, database systems, and enterprise architecture. Completed coursework in web technologies, systems analysis, and project management.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Featured Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Oasis Schools Arua</h3>
+        </p>A school website, providing information about the schools, timely update of news and information, past and upcoming events</p>
+        <div class="project-links">
+          <a href="https://oasisschoolsarua.com" target="_blank" class="project-link">
+            <i class="fas fa-external-link-alt"></i> Live Site
+          </a>
+          <a href="https://github.com/sangaben/oasis-schools" target="_blank" class="project-link">
+            <i class="fab fa-github"></i> Code
+          </a>
+        </div>
+        <div class="tech-used">
+          <span class="tech-tag">Django</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Bootstrap</span>
+          <span class="tech-tag">Jazzmin</span>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <h3>EcoHope Co. Ltd</h3>
+        <p>Agricultural platform connecting farmers with modern crop/livestock solutions and market information.</p>
+        <div class="project-links">
+          <a href="https://ecohope.co.ug" target="_blank" class="project-link">
+            <i class="fas fa-external-link-alt"></i> Live Site
+          </a>
+          <a href="https://github.com/sangaben/ecohope" target="_blank" class="project-link">
+            <i class="fab fa-github"></i> Code
+          </a>
+        </div>
+        <div class="tech-used">
+          <span class="tech-tag">Django</span>
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">REST API</span>
+          <span class="tech-tag">AWS</span>
+        </div>
+      </div>
+      
+      <div class="project-card">
+        <h3>SangaBiz</h3>
+        <p>Music streaming platform with artist profiles, song catalogs, and integrated music news.</p>
+        <div class="project-links">
+          <a href="https://sangabiz.onrender.com" target="_blank" class="project-link">
+            <i class="fas fa-external-link-alt"></i> Live Site
+          </a>
+          <a href="https://github.com/sangaben/sangabiz" target="_blank" class="project-link">
+            <i class="fab fa-github"></i> Code
+          </a>
+        </div>
+        <div class="tech-used">
+          <span class="tech-tag">Django</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">SQLite</span>
+          <span class="tech-tag">Tailwind CSS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <div class="skills-container">
+      <div class="skill-category">
+        <h3><i class="fas fa-laptop-code"></i> Development</h3>
+        <ul>
+          <li>Python & Django</li>
+          <li>JavaScript (ES6+)</li>
+          <li>React.js</li>
+          <li>HTML5 & CSS3</li>
+          <li>RESTful APIs</li>
+        </ul>
+      </div>
+      
+      <div class="skill-category">
+        <h3><i class="fas fa-paint-brush"></i> Design</h3>
+        <ul>
+          <li>UI/UX Design</li>
+          <li>Adobe Photoshop</li>
+          <li>Adobe Illustrator</li>
+          <li>Figma</li>
+          <li>Brand Identity</li>
+        </ul>
+      </div>
+      
+      <div class="skill-category">
+        <h3><i class="fas fa-server"></i> Infrastructure</h3>
+        <ul>
+          <li>Web Hosting</li>
+          <li>Linux Server</li>
+          <li>Docker</li>
+          <li>AWS Basics</li>
+          <li>CI/CD Pipelines</li>
+        </ul>
+      </div>
+      
+      <div class="skill-category">
+        <h3><i class="fas fa-tools"></i> Tools</h3>
+        <ul>
+          <li>Git & GitHub</li>
+          <li>PostgreSQL</li>
+          <li>VS Code</li>
+          <li>Jira/Trello</li>
+          <li>Agile Methodologies</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Get In Touch</h2>
+    <p>I'm currently available for projects and collaborations. Whether you need a website, design work, or hosting solutions, let's discuss how I can help.</p>
+    
+    <div class="contact-methods">
+      <div class="contact-card">
+        <i class="fas fa-envelope"></i>
+        <p><a href="mailto:sangaben07@gmail.com">sangaben07@gmail.com</a></p>
+      </div>
+      
+      <div class="contact-card">
+        <i class="fab fa-whatsapp"></i>
+        <p><a href="https://wa.me/256766670007" target="_blank">+256 766 670 007</a></p>
+      </div>
+      
+      <div class="contact-card">
+        <i class="fab fa-github"></i>
+        <p><a href="https://github.com/sangaben" target="_blank">github.com/sangaben</a></p>
+      </div>
+      
+      <div class="contact-card">
+        <i class="fab fa-linkedin"></i>
+        <p><a href="https://www.linkedin.com/in/ben-sanga-a9b2032b1/" target="_blank">LinkedIn Profile</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Sanga Benjamin. All rights reserved.</p>
+    <p>Built with ❤️ using HTML, CSS, and JavaScript</p>
+  </footer>
+</body>
+</html>
